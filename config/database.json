@@ -1,6 +1,6 @@
 {
   "database": "blog_server",
-  "username": "root",
+  "username": "other",
   "password": "Zzwdsg123456.",
   "host": "121.5.23.189",
   "port": 3306
