@@ -1,5 +1,7 @@
 const blogService = require('../service/blog')
-const koaReq = require('koa2-request')
+const serverConfig = require('../config/database.json')
+const fs = require('fs')
+
 const marked = require('marked')
 
 const getBlogList = async (ctx) => {
@@ -25,13 +27,8 @@ const getBlogById = async (ctx)=>{
   }
 
   const {dataValues} = await blogService.getBlogById(id)
-    // markdown文件的链接前缀(暂时使用假链接)
-  const mdFileUrl = `http://localhost:8010/file/md/${dataValues.file}`
-  const {body:fileDetail} = await koaReq({
-    url: mdFileUrl,
-    method: 'get',
-  })
-  dataValues.fileDetail = fileDetail
+  const file = fs.readFileSync(`${serverConfig.filePath}/${dataValues.file}`)
+  dataValues.fileDetail = file.toString()
   ctx.body = dataValues
 }
 
