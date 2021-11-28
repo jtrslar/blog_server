@@ -26,7 +26,7 @@ const getBlogById = async (ctx)=>{
 
   const {dataValues} = await blogService.getBlogById(id)
     // markdown文件的链接前缀(暂时使用假链接)
-  const mdFileUrl = `http://121.5.23.189:8010/file/md/${dataValues.file}`
+  const mdFileUrl = `http://localhost:8010/file/md/${dataValues.file}`
   const {body:fileDetail} = await koaReq({
     url: mdFileUrl,
     method: 'get',

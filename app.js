@@ -1,12 +1,10 @@
 const Koa = require('koa')
 const app = new Koa()
 const json = require('koa-json')
-// const views = require('koa-views')
 const logger = require('koa-logger')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 
-const index = require('./routes/index')
 const blog = require('./routes/blog')
 
 // error handler
@@ -22,12 +20,6 @@ app.use(json())
 app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))
 
-// app.use(
-//   views(__dirname + '/views', {
-//     extension: 'pug',
-//   })
-// )
-
 // logger
 app.use(async (ctx, next) => {
   const start = new Date()
@@ -37,7 +29,6 @@ app.use(async (ctx, next) => {
 })
 
 // routes
-app.use(index.routes(), index.allowedMethods())
 app.use(blog.routes(), blog.allowedMethods())
 
 // error-handling
